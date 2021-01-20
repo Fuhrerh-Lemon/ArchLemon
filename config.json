@@ -48,23 +48,23 @@
             "eleccion": "todo"
         },
         "utilidades": {
-            "_comentario": "Opciones: True, False",
-            "android": true,
+            "_comentario": "Opciones: true, fale",
+            "android": false,
             "git": true,
             "wget": true,
-            "neofetch": true
+            "neofetch": false
         },
         "extra": {
-            "_comentario": "Opciones: True, False",
+            "_comentario": "Opciones: true, fale",
             "rofi": true,
             "scrot": true,
             "qview": true,
-            "pulseaudio": true,
-            "waifai": true,
-            "Bluetuuu": true
+            "pulseaudio": false,
+            "waifai": false,
+            "Bluetuuu": false
         },
         "dev": {
-            "_comentario": "Opciones: True, False",
+            "_comentario": "Opciones: true, fale",
             "gcc": true,
             "cmake": true,
             "anaconda": true
