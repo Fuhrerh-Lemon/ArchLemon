@@ -9,8 +9,8 @@ declare -r editor=$(cat config.json | jq -r '."general"."app-general".editor"')
 declare -r archivos=$(cat config.json | jq -r '."general"."app-general"."gestor-archivos"')
 declare -r navegador=$(cat config.json | jq -r '."general"."app-general"."navegador"')
 declare -r aur=$(cat config.json | jq -r '."general"."aur-helper"."eleccion"')
-declare -r DM=$(cat config.json | jq -r '."general"."DM"."eleccion"')
-declare -r WM=$(cat config.json | jq -r '."general"."WM"."eleccion"')
+declare -r DM=$(cat config.json | jq -r '."general"."DM"."dm"')
+declare -r WM=$(cat config.json | jq -r '."general"."WM"."wm"')
 declare -r video=$(cat config.json | jq -r '."general"."GPU"."eleccion"')
 
 # Funcion que contiene todos los programas a instalar
@@ -47,6 +47,8 @@ function lemon_programs(){
         ######
         if [ "${video}" == "Nvidea" ]
         then
+            clear
+            titulo_
             titulo=$video
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-nouveau mesa mesa-libgl qemu-guest-agent --noconfirm >/dev/null 2>&1"
@@ -54,6 +56,8 @@ function lemon_programs(){
         ######
         if [ "${video}" == "AMD" ]
         then
+            clear
+            titulo_
             titulo=$video
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-ati mesa mesa-libgl qemu-guest-agent --noconfirm >/dev/null 2>&1"
@@ -61,6 +65,8 @@ function lemon_programs(){
         ######
         if [ "${video}" == "INTEL" ]
         then
+            clear
+            titulo_
             titulo=$video
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-intel mesa mesa-libgl qemu-guest-agent --noconfirm >/dev/null 2>&1"
@@ -144,6 +150,8 @@ function lemon_programs(){
         ######
         if [ $(cat config.json | jq -r '.general.utilidades.git') ]
         then
+            clear
+            titulo_
             titulo='Git'
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S git --noconfirm >/dev/null 2>&1"
@@ -151,6 +159,8 @@ function lemon_programs(){
         ######
         if [ $(cat config.json | jq -r '.general.utilidades.wget') ]
         then
+            clear
+            titulo_
             titulo='Wget'
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S wget --noconfirm >/dev/null 2>&1"
@@ -158,6 +168,8 @@ function lemon_programs(){
         ######
         if [ $(cat config.json | jq -r '.general.utilidades.neofetch') ]
         then
+            clear
+            titulo_
             titulo='neofetch'
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S neofetch lsb-release xdg-user-dirs --noconfirm >/dev/null 2>&1"
@@ -175,17 +187,23 @@ function lemon_programs(){
     ######
         titulo='gnu-free-fonts'
         aumentar_ ${titulo}
+        arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S nerd-fonts --noeditmenu --noconfirm --needed >/dev/null 2>&1"
         ######
+        clear
+        titulo_
         titulo='gnome-font-viewer'
         aumentar_ ${titulo}
         ######
+        clear
+        titulo_
         titulo='ttf-hack ttf-inconsolata'
         aumentar_ ${titulo}
         ######
+        clear
+        titulo_
         titulo='nerd-fonts'
         aumentar_ ${titulo}
         ######
-        arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S nerd-fonts --noeditmenu --noconfirm --needed >/dev/null 2>&1"
         arch-chroot /mnt /bin/bash -c "pacman -S gnu-free-fonts ttf-hack ttf-inconsolata gnome-font-viewer --noconfirm >/dev/null 2>&1"
     echo ''
     ######
@@ -200,6 +218,7 @@ function lemon_programs(){
             titulo=$DM
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S $DM --noconfirm >/dev/null 2>&1"
+            arch-chroot /mnt /bin/bash -c "systemctl enable $DM >/dev/null 2>&1"
         fi
         ######
         if [ "${DM}" == "lightdm"]
@@ -222,6 +241,13 @@ function lemon_programs(){
             titulo=$WM
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S $WM pygtk python2 --noconfirm >/dev/null 2>&1"
+            clear
+            titulo_
+            titulo='Complementos'
+            aumentar_ ${titulo}
+            arch-chroot /mnt /bin/bash -c "pacman -S network-manager-applet polkit-gnome lxappearance gnome-themes-extra --noconfirm >/dev/null 2>&1"
+            echo ly > DMservice
+            qtile_config=true
         fi
         ######
         if [ "${WM}" == "bspwm" ]
@@ -229,11 +255,15 @@ function lemon_programs(){
             titulo=$WM
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S $WM sxhkd --noconfirm >/dev/null 2>&1"
+            clear
+            titulo_
+            titulo='Complementos'
+            aumentar_ ${titulo}
+            arch-chroot /mnt /bin/bash -c "pacman -S network-manager-applet polkit-gnome lxappearance gnome-themes-extra --noconfirm >/dev/null 2>&1"
+            echo ly > DMservice
+            bspwmtema=true
         fi
         ######
-        titulo='Complementos'
-        aumentar_ ${titulo}
-        arch-chroot /mnt /bin/bash -c "pacman -S polkit-gnome lxappearance gnome-themes-extra --noconfirm >/dev/null 2>&1"
     echo ''
     ######
     sleep 2
@@ -262,6 +292,8 @@ function lemon_programs(){
             ######
             if [ "${aur}" == "octopi" ]
             then
+                clear
+                titulo_
                 titulo=$aur
                 aumentar_ ${titulo}
                 arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $aur --noeditmenu --noconfirm --needed >/dev/null 2>&1"
@@ -285,6 +317,8 @@ function lemon_programs(){
         ######
         if [ $(cat config.json | jq -r '.general.extra.scrot') ]
         then # Captura de pantalla
+            clear
+            titulo_
             titulo='scrot'
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S scrot --noconfirm >/dev/null 2>&1"
@@ -292,6 +326,8 @@ function lemon_programs(){
         ######
         if [ $(cat config.json | jq -r '.general.extra.qview') ]
         then # Visualizador de imagenes
+            clear
+            titulo_
             titulo='qview'
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S qview --noeditmenu --noconfirm --needed >/dev/null 2>&1"
@@ -299,6 +335,8 @@ function lemon_programs(){
         ######
         if [ $(cat config.json | jq -r '.general.extra.pulseaudio') ]
         then # Audio
+            clear
+            titulo_
             titulo='pulseaudio'
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S pulseaudio pavucontrol --noconfirm >/dev/null 2>&1"
@@ -306,6 +344,8 @@ function lemon_programs(){
         ######
         if [ $(cat config.json | jq -r '.general.extra.waifai') ]
         then # Wifi
+            clear
+            titulo_
             titulo='wifi'
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S iw wireless_tools wpa_supplicant dialog wireless-regdb --noconfirm >/dev/null 2>&1"
@@ -313,6 +353,8 @@ function lemon_programs(){
         ######
         if [ $(cat config.json | jq -r '.general.extra.Bluetuuu') ]
         then # Bluetooth
+            clear
+            titulo_
             titulo='Bluetuuu'
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S bluez bluez-utils pulseaudio-bluetooth >/dev/null 2>&1"
@@ -355,6 +397,8 @@ function lemon_programs(){
         ######
         if [ $(cat config.json | jq -r '.general.dev.cmake') ]
         then # Cmake
+            clear
+            titulo_
             titulo='cmake'
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S cmake --noconfirm >/dev/null 2>&1"
@@ -362,6 +406,8 @@ function lemon_programs(){
         ######
         if [ $(cat config.json | jq -r '.general.dev.anaconda') ]
         then # Anaconda
+            clear
+            titulo_
             titulo='anaconda'
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S anaconda --noeditmenu --noconfirm --needed >/dev/null 2>&1"
