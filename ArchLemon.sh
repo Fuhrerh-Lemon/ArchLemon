@@ -75,7 +75,7 @@ declare -r fin='\e[0m'					# Termina secuencia de colores
 clear
 titulo_
 echo ''
-	echo "[----------Sistema en ${rojo}español${fin}----------]"
+	echo -e "[----------Sistema en ${rojo}español${fin}----------]"
 	echo 'es_ES.UTF-8 UTF-8' > /etc/locale.gen
 	locale-gen
 	echo 'LANG=es_ES.UTF-8' > /etc/locale.conf
@@ -87,7 +87,7 @@ sleep 3
 clear
 titulo_
 echo ''
-	echo "[----------Llaves del ${cyan}sistema${fin}----------]"
+	echo -e "[----------Llaves del ${cyan}sistema${fin}----------]"
 	pacman -Sy archlinux-keyring --noconfirm
 	clear
 	pacman -Sy reflector python rsync --noconfirm
@@ -108,7 +108,7 @@ sleep 3
 clear
 titulo_
 echo ''
-	echo "[----------Configuración ${rosado}datos usuario${fin}----------]"
+	echo -e "[----------Configuración ${rosado}datos usuario${fin}----------]"
 	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
 	echo "print devices" | parted | grep /dev/ | awk '{if (NR!=1) {print}}'
 	echo ''
@@ -168,7 +168,7 @@ then
 	clear
 	titulo_
 	echo ''
-		echo "[----------Formateando ${amarillo}Particiones${fin}----------]"
+		echo -e "[----------Formateando ${amarillo}Particiones${fin}----------]"
 		mkfs.ext4 $(cat root-efi)
 		mount $(cat root-efi) /mnt 
 		######
@@ -188,7 +188,7 @@ then
 	clear
 	titulo_
 	echo ''
-		echo "[----------Revisando punto de montaje en ${rojo_claro}MOUNTPOINT${fin}----------]"
+		echo -e "[----------Revisando punto de montaje en ${rojo_claro}MOUNTPOINT${fin}----------]"
 		lsblk -l
 	echo ''
 	sleep 2
@@ -230,7 +230,7 @@ else
 	clear
 	titulo_
 	echo ''
-		echo "[----------Formateando ${amarillo}Particiones${fin}----------]"
+		echo -e "[----------Formateando ${amarillo}Particiones${fin}----------]"
 		mkfs.ext4 $(cat root-bios) 
 		mount $(cat root-bios) /mnt 
 		######
@@ -250,7 +250,7 @@ else
 	clear
 	titulo_
 	echo ''
-		echo "[----------Revisando punto de montaje en ${rojo_claro}MOUNTPOINT${fin}----------]"
+		echo -e "[----------Revisando punto de montaje en ${rojo_claro}MOUNTPOINT${fin}----------]"
 		lsblk -l
 	echo ''
 	sleep 2
@@ -259,7 +259,7 @@ fi
 clear
 titulo_
 echo ''
-	echo "[----------Instalando ${verde_claro}Sistema base${fin}----------]"
+	echo -e "[----------Instalando ${verde_claro}Sistema base${fin}----------]"
 	pacstrap /mnt base base-devel nano reflector python rsync
 echo ''
 sleep 2
@@ -267,7 +267,7 @@ sleep 2
 clear
 titulo_
 echo ''
-	echo "[----------Archivo ${morado}FSTAB${fin}----------]"
+	echo -e "[----------Archivo ${morado}FSTAB${fin}----------]"
 	echo "genfstab -p /mnt >> /mnt/etc/fstab"
 	echo ''
 	######
@@ -280,7 +280,7 @@ sleep 3
 clear
 titulo_
 echo ''
-	echo "[----------Configuración de ${morado_claro}pacman${fin}----------]"
+	echo -e "[----------Configuración de ${morado_claro}pacman${fin}----------]"
 	sed -i 's/#Color/Color/g' /mnt/etc/pacman.conf
 	sed -i 's/#TotalDownload/TotalDownload/g' /mnt/etc/pacman.conf
 	sed -i 's/#VerbosePkgLists/VerbosePkgLists/g' /mnt/etc/pacman.conf
@@ -298,7 +298,7 @@ sleep 3
 clear
 titulo_
 echo ''
-	echo "[----------Nombre del ${gris_claro}computador${fin}----------]"
+	echo -e "[----------Nombre del ${gris_claro}computador${fin}----------]"
 	echo "$hostname" > /mnt/etc/hostname
 	echo "127.0.1.1 $hostname.localdomain $hostname" > /mnt/etc/hosts
 	echo ''
@@ -312,7 +312,7 @@ sleep 3
 clear
 titulo_
 echo ''
-	echo "[----------${cyan}Admin${fin}----------]"
+	echo -e "[----------${cyan}Admin${fin}----------]"
 	arch-chroot /mnt /bin/bash -c "(echo $root_passwd ; echo $root_passwd) | passwd root"
 	arch-chroot /mnt /bin/bash -c "useradd -m -g users -s /bin/bash $user"
 	arch-chroot /mnt /bin/bash -c "(echo $user_passwd ; echo $user_passwd) | passwd $user"
@@ -358,7 +358,7 @@ sleep 3
 clear
 titulo_
 echo ''
-	echo "[----------${red}KeyMap${fin}----------]"
+	echo -e "[----------${red}KeyMap${fin}----------]"
 	echo "KEYMAP=es" > /mnt/etc/vconsole.conf 
 	cat /mnt/etc/vconsole.conf 
 	clear
@@ -375,12 +375,12 @@ sleep 3
 clear
 titulo_
 echo ''
-	echo "[----------Actualizando ${verde_claro}MirrorList${fin}----------]"
+	echo -e "[----------Actualizando ${verde_claro}MirrorList${fin}----------]"
 	echo ''
 	arch-chroot /mnt /bin/bash -c "reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist"
 	sleep 2
 	clear
-	echo "[----------${amarillo}Lista de MirrorList${fin}----------]"
+	echo -e "[----------${amarillo}Lista de MirrorList${fin}----------]"
 	cat /mnt/etc/pacman.d/mirrorlist
 echo ''
 sleep 3
@@ -413,7 +413,7 @@ then
     clear
 	titulo_
 	echo ''
-		echo "[----------${cyan}Grub del sistema${fin}----------]"
+		echo -e "[----------${cyan}Grub del sistema${fin}----------]"
 		arch-chroot /mnt /bin/bash -c "pacman -S grub efibootmgr os-prober dosfstools --noconfirm"
 		echo ''
 		echo 'Instalando EFI System >> bootx64.efi'
@@ -436,7 +436,7 @@ else
     clear
 	titulo_
 	echo ''
-		echo "[----------${cyan}Grub del sistema${fin}----------]"
+		echo -e "[----------${cyan}Grub del sistema${fin}----------]"
 		arch-chroot /mnt /bin/bash -c "pacman -S grub os-prober --noconfirm"
 		echo ''
 		arch-chroot /mnt /bin/bash -c "grub-install --target=i386-pc $disco"
@@ -461,7 +461,7 @@ lemon_programs ${user}
 clear
 titulo_
 echo ''
-	echo "[----------Formato del ${rojo_claro}teclado${fin}----------]"
+	echo -e "[----------Formato del ${rojo_claro}teclado${fin}----------]"
 	arch-chroot /mnt /bin/bash -c "localectl --no-convert set-x11-keymap $keymap"
 	arch-chroot /mnt /bin/bash -c "setxkbmap -layout $keymap"
 	######
