@@ -25,11 +25,11 @@
         },
         "DM": {
             "_comentario": "Opciones: lightdm, ly-git",
-            "eleccion": "ly-git"
+            "dm": "ly-git"
         },
         "WM": {
-            "_comentario": "Opciones: qtile, bspwm",
-            "eleccion": "qtile"
+            "_comentario": "Opciones: qtile, bspwm, awesome",
+            "wm": "awesome"
         },
         "GPU": {
             "_comentario": "Opciones: maquina-virtual, Nvidea, AMD, INTEL",
@@ -40,7 +40,6 @@
             "terminal": "alacritty",
             "shell": "fish",
             "editor": "vim",
-            "gestor-archivos": "thunar",
             "navegador": "brave-bin"
         },
         "aur-helper": {
@@ -58,7 +57,7 @@
             "_comentario": "Opciones: true, fale",
             "rofi": true,
             "scrot": true,
-            "qview": true,
+            "qview": false,
             "pulseaudio": false,
             "waifai": false,
             "Bluetuuu": false
@@ -67,7 +66,7 @@
             "_comentario": "Opciones: true, fale",
             "gcc": true,
             "cmake": true,
-            "anaconda": true
+            "anaconda": false
         }
     }
 }
