@@ -33,11 +33,11 @@ Puedes cambiar los valores en config.json
         },
         "DM": {
             "_comentario": "Opciones: lightdm, ly-git",
-            "eleccion": "ly-git"
+            "dm": "ly-git"
         },
         "WM": {
-            "_comentario": "Opciones: qtile, bspwm",
-            "eleccion": "qtile"
+            "_comentario": "Opciones: qtile, bspwm, awesome",
+            "wm": "awesome"
         },
         "GPU": {
             "_comentario": "Opciones: maquina-virtual, Nvidea, AMD, INTEL",
@@ -48,7 +48,6 @@ Puedes cambiar los valores en config.json
             "terminal": "alacritty",
             "shell": "fish",
             "editor": "vim",
-            "gestor-archivos": "thunar",
             "navegador": "brave-bin"
         },
         "aur-helper": {
@@ -56,26 +55,26 @@ Puedes cambiar los valores en config.json
             "eleccion": "todo"
         },
         "utilidades": {
-            "_comentario": "Opciones: True, False",
-            "android": true,
+            "_comentario": "Opciones: true, fale",
+            "android": false,
             "git": true,
             "wget": true,
-            "neofetch": true
+            "neofetch": false
         },
         "extra": {
-            "_comentario": "Opciones: True, False",
+            "_comentario": "Opciones: true, fale",
             "rofi": true,
             "scrot": true,
-            "qview": true,
-            "pulseaudio": true,
-            "waifai": true,
-            "Bluetuuu": true
+            "qview": false,
+            "pulseaudio": false,
+            "waifai": false,
+            "Bluetuuu": false
         },
         "dev": {
-            "_comentario": "Opciones: True, False",
+            "_comentario": "Opciones: true, fale",
             "gcc": true,
             "cmake": true,
-            "anaconda": true
+            "anaconda": false
         }
     }
 }
