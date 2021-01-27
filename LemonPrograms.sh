@@ -6,7 +6,6 @@
 declare -r Shell=$(cat config.json | jq -r '."general"."app-general"."shell"')
 declare -r terminal=$(cat config.json | jq -r '."general"."app-general"."terminal"')
 declare -r editor=$(cat config.json | jq -r '."general"."app-general".editor"')
-declare -r archivos=$(cat config.json | jq -r '."general"."app-general"."gestor-archivos"')
 declare -r navegador=$(cat config.json | jq -r '."general"."app-general"."navegador"')
 declare -r aur=$(cat config.json | jq -r '."general"."aur-helper"."eleccion"')
 declare -r DM=$(cat config.json | jq -r '."general"."DM"."dm"')
@@ -108,17 +107,6 @@ function lemon_programs(){
         titulo=$editor
         aumentar_ ${titulo}
         arch-chroot /mnt /bin/bash -c "pacman -S $editor --noconfirm >/dev/null 2>&1"
-    echo ''
-    ######
-
-    # Gestor de archivos
-    clear
-    titulo_
-    echo '__________Gestor de Archivos__________'
-    ######
-        titulo=$archivos
-        aumentar_ ${titulo}
-        arch-chroot /mnt /bin/bash -c "pacman -S $archivos --noconfirm >/dev/null 2>&1"
     echo ''
     ######
     
@@ -240,12 +228,7 @@ function lemon_programs(){
         then
             titulo=$WM
             aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "pacman -S $WM pygtk python2 --noconfirm >/dev/null 2>&1"
-            clear
-            titulo_
-            titulo='Complementos'
-            aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "pacman -S network-manager-applet polkit-gnome lxappearance gnome-themes-extra --noconfirm >/dev/null 2>&1"
+            arch-chroot /mnt /bin/bash -c "pacman -S $WM python python2 thunar alacritty network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noconfirm >/dev/null 2>&1"
             echo ly > DMservice
             qtile_config=true
         fi
@@ -254,12 +237,15 @@ function lemon_programs(){
         then
             titulo=$WM
             aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "pacman -S $WM sxhkd --noconfirm >/dev/null 2>&1"
-            clear
-            titulo_
-            titulo='Complementos'
+            arch-chroot /mnt /bin/bash -c "pacman -S $WM sxhkd rofi dmenu st thunar network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noconfirm >/dev/null 2>&1"
+            echo ly > DMservice
+            bspwmtema=true
+        fi
+        if [ "${WM}" == "awesome" ]
+        then
+            titulo=$WM
             aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "pacman -S network-manager-applet polkit-gnome lxappearance gnome-themes-extra --noconfirm >/dev/null 2>&1"
+            arch-chroot /mnt /bin/bash -c "pacman -S $WM rxvt-unicode rofi st thunar network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git gnome-themes-extra --noconfirm >/dev/null 2>&1"
             echo ly > DMservice
             bspwmtema=true
         fi
