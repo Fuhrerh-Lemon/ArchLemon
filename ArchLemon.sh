@@ -398,10 +398,6 @@ echo ''
 	arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm >/dev/null 2>&1"
 	arch-chroot /mnt /bin/bash -c "pacman -Sy alsi yay-bin --noconfirm --needed >/dev/null 2>&1"
 	arch-chroot /mnt /bin/bash -c "pacman -S linux-zen linux-zen-headers linux-firmware mkinitcpio --noconfirm >/dev/null 2>&1"
-	arch-chroot /mnt /bin/bash -c "pacman -S pacman-mirrorlist cryptsetup lvm2 logrotate nano hddtemp unzip zip --noconfirm --needed >/dev/null 2>&1"
-	arch-chroot /mnt /bin/bash -c "pacman -S dnsmasq ethtool ndisc6 inetutils wvdial gptfdisk dhcp dhcpcd dhclient ppp netctl networkmanager --noconfirm --needed >/dev/null 2>&1"
-	arch-chroot /mnt /bin/bash -c "pacman -S iwd net-tools ifplugd dialog neofetch git wget lsb-release accountsservice bash-completion --noconfirm --needed >/dev/null 2>&1"
-	arch-chroot /mnt /bin/bash -c "pacman -S less ntp usb_modeswitch usbutils which mtools exfat-utils --noconfirm --needed >/dev/null 2>&1"
 echo ''
 sleep 3
 ######
