@@ -196,29 +196,6 @@ function lemon_programs(){
     echo ''
     ######
 
-    # Display Manager
-    clear
-    titulo_
-    echo '__________Display Manager__________'
-    ######
-        if [ "${DM}" == "ly-git"]
-        then
-            titulo=$DM
-            aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "pacman -S $DM --noconfirm >/dev/null 2>&1"
-            arch-chroot /mnt /bin/bash -c "systemctl enable $DM >/dev/null 2>&1"
-        fi
-        ######
-        if [ "${DM}" == "lightdm"]
-        then
-            titulo=$DM
-            aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "pacman -S $DM lightdm-gtk-greeter lightdm-gtk-greeter-settings light-locker accountsservice --noconfirm >/dev/null 2>&1"
-            arch-chroot /mnt /bin/bash -c "systemctl enable $DM >/dev/null 2>&1"
-        fi
-    echo ''
-    ######
-
     # Escritorios (Opcionales)
     clear
     titulo_
@@ -250,6 +227,29 @@ function lemon_programs(){
             bspwmtema=true
         fi
         ######
+    echo ''
+    ######
+
+    # Display Manager
+    clear
+    titulo_
+    echo '__________Display Manager__________'
+    ######
+        if [ "${DM}" == "ly-git"]
+        then
+            titulo=$DM
+            aumentar_ ${titulo}
+            arch-chroot /mnt /bin/bash -c "pacman -S $DM --noconfirm >/dev/null 2>&1"
+            arch-chroot /mnt /bin/bash -c "systemctl enable $DM >/dev/null 2>&1"
+        fi
+        ######
+        if [ "${DM}" == "lightdm"]
+        then
+            titulo=$DM
+            aumentar_ ${titulo}
+            arch-chroot /mnt /bin/bash -c "pacman -S $DM lightdm-gtk-greeter lightdm-gtk-greeter-settings light-locker accountsservice --noconfirm >/dev/null 2>&1"
+            arch-chroot /mnt /bin/bash -c "systemctl enable $DM >/dev/null 2>&1"
+        fi
     echo ''
     ######
     sleep 2
@@ -343,7 +343,7 @@ function lemon_programs(){
             titulo_
             titulo='Bluetuuu'
             aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "pacman -S bluez bluez-utils pulseaudio-bluetooth >/dev/null 2>&1"
+            arch-chroot /mnt /bin/bash -c "pacman -S bluez bluez-utils pulseaudio-bluetooth --noconfirm >/dev/null 2>&1"
         fi
     echo ''
     ######
