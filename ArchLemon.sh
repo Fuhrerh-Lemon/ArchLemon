@@ -1,6 +1,7 @@
 #!/bin/bash
 : 'Copyright (C) 2021 FuhrerLemon, Hewel Ochoa'
 #!/bin/bash
+source ./ReadJson.sh
 source ./ProgressBar.sh
 source ./LemonPrograms.sh
 
@@ -26,13 +27,13 @@ function aumentar_(){
 }
 
 # Variables globales																		# Cambiar los config.json
-declare -r disco=$(cat config.json | jq -r '."general"."disco"')							# /dev/sda disco a particionar
-declare -r user=$(cat config.json | jq -r '."general"."usuario"."nombre"')					# Nombre de usuario
-declare -r hostname=$(cat config.json | jq -r '."general"."hostname"."nombre"')				# Nombre de la pc
-declare -r root_passwd=$(cat config.json | jq -r '."general"."hostname"."contraroot"')		# Contraseña del usuario root
-declare -r user_passwd=$(cat config.json | jq -r '."general"."usuario"."contrausuario"')	# Contraseña del usuario
-declare -r user_pais=$(cat config.json | jq -r '."general"."idioma-teclado"."pais"')		# País del usuario
-declare -r keymap=$(cat config.json | jq -r '."general"."idioma-teclado"."keymap"')			# Teclado
+declare -r disco=`readJson config.json disco` || exit 1; 									# /dev/sda disco a particionar
+declare -r user=`readJson config.json nombre` || exit 1; 									# Nombre de usuario
+declare -r hostname=`readJson config.json host` || exit 1; 									# Nombre de la pc
+declare -r root_passwd=`readJson config.json contraroot` || exit 1; 						# Contraseña del usuario root
+declare -r user_passwd=`readJson config.json contrausuario` || exit 1; 						# Contraseña del usuario
+declare -r user_pais=`readJson config.json pais` || exit 1; 								# País del usuario
+declare -r keymap=`readJson config.json keymap` || exit 1; 									# Teclado
 declare -r swap=$(cat config.json | jq -r '."general"."particion"."swap"')					# +2G	 particion swap
 declare -r root=$(cat config.json | jq -r '."general"."particion"."root"')					# +20G	 particion root
 declare -r efi=$(cat config.json | jq -r '."general"."particion"."efi"')					# +200M  particion efi
@@ -383,13 +384,12 @@ echo ''
 	echo -e "[----------${amarillo}Lista de MirrorList${fin}----------]"
 	cat /mnt/etc/pacman.d/mirrorlist
 echo ''
-sleep 3
 
 # Instalación del kernel
 clear
 titulo_
 echo ''
-	titulo='Kernel Zen'
+	titulo='Kernel'
 	aumentar_ ${titulo}
 	arch-chroot /mnt /bin/bash -c "pacman -S linux-firmware linux linux-headers mkinitcpio --noconfirm >/dev/null 2>&1"
 echo ''
