@@ -7,7 +7,7 @@
             "contrausuario": "12345"
         },
         "hostname": {
-            "nombre": "arch",
+            "host": "arch",
             "contraroot": "54321"
         },
         "disco": "/dev/sda",
@@ -33,7 +33,7 @@
         },
         "GPU": {
             "_comentario": "Opciones: maquina-virtual, Nvidea, AMD, INTEL",
-            "eleccion": "maquina-virtual"
+            "eleccion-gpu": "maquina-virtual"
         },
         "app-general": {
             "_comentario":"Opciones terminal(alacritty, rxvt-unicode, kitty), shell(zsh, fish), editor(vim, nano, gedit), Navegadores(brave-bin, firefox)",
@@ -44,7 +44,7 @@
         },
         "aur-helper": {
             "_comentario": "Opciones: yay, octopi, paru, todo, nada",
-            "eleccion": "paru"
+            "eleccion-aur": "paru"
         },
         "utilidades": {
             "_comentario": "Opciones: true, fale",
