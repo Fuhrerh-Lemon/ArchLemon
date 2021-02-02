@@ -99,7 +99,7 @@ function lemon_programs(){
     ######
         titulo='Xorg'
         aumentar_ ${titulo}
-        arch-chroot /mnt /bin/bash -c "pacman -S xorg xorg-apps xorg-xinit xorg-twm xterm xorg-xclock --noconfirm >/dev/null 2>&1"
+        arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S xorg xorg-apps xorg-xinit xorg-twm xterm xf86-input-libinput --noeditmenu --noconfirm --needed >/dev/null 2>&1"
     echo ''
     ######
     sleep 3
@@ -184,14 +184,14 @@ function lemon_programs(){
         titulo=$WM
         aumentar_ ${titulo}
         if [ "${WM}" == "qtile" ];then
-            arch-chroot /mnt /bin/bash -c "pacman -S $WM python python2 thunar alacritty network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noconfirm >/dev/null 2>&1"
+            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $WM python python2 thunar alacritty network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noeditmenu --noconfirm --needed >/dev/null 2>&1"
         fi
         ######
         if [ "${WM}" == "bspwm" ];then
-            arch-chroot /mnt /bin/bash -c "pacman -S $WM sxhkd dmenu st thunar network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noconfirm >/dev/null 2>&1"
+            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $WM sxhkd dmenu st thunar network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noeditmenu --noconfirm --needed >/dev/null 2>&1"
         fi
         if [ "${WM}" == "awesome" ];then
-            arch-chroot /mnt /bin/bash -c "pacman -S $WM st thunar network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noconfirm >/dev/null 2>&1"
+            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $WM st thunar network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noeditmenu --noconfirm --needed >/dev/null 2>&1"
         fi
         ######
     echo ''
@@ -205,12 +205,10 @@ function lemon_programs(){
         aumentar_ ${titulo}
         if [ "${DM}" == "ly-git"];then
             arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $DM --noeditmenu --noconfirm --needed >/dev/null 2>&1"
-            arch-chroot /mnt /bin/bash -c "systemctl enable $DM >/dev/null 2>&1"
-        fi
-        ######
-        if [ "${DM}" == "lightdm"];then
-            arch-chroot /mnt /bin/bash -c "pacman -S $DM lightdm-gtk-greeter lightdm-gtk-greeter-settings light-locker accountsservice --noconfirm >/dev/null 2>&1"
-            arch-chroot /mnt /bin/bash -c "systemctl enable $DM >/dev/null 2>&1"
+            echo -e "\t\t\t\tActivando Servicio Display Manager"
+            printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+            echo -e ""
+            arch-chroot /mnt /bin/bash -c "systemctl enable $(cat DMservice)"
         fi
     echo ''
     ######
@@ -227,7 +225,7 @@ function lemon_programs(){
             arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $aur --noeditmenu --noconfirm --needed >/dev/null 2>&1"
         fi
         ######
-        if [ "${aur}" == "yay" ]
+        if [ "${aur}" == "yay-bin" ]
         then
             titulo=$aur
             aumentar_ ${titulo}
