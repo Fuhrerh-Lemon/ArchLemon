@@ -18,7 +18,7 @@ function lemon_programs(){
     titulo_
     ######
     # NetWorkManager
-    echo '__________NetWorkManager__________'
+    echo '\t\t\t[----------NetWorkManager----------]'
         ######
         titulo='networkmanager'
         aumentar_ ${titulo}
@@ -35,7 +35,7 @@ function lemon_programs(){
     # GPU Video
     clear
     titulo_
-    echo '__________GPU Video__________'
+    echo '\t\t\t[----------GPU Video----------]'
     ######
         if [ "${video}" == "maquina-virtual" ]
         then
@@ -76,7 +76,7 @@ function lemon_programs(){
      # Terminales
     clear
     titulo_
-    echo '__________Terminales__________'
+    echo '\t\t\t[----------Terminales----------]'
     ######
         titulo=$terminal
         aumentar_ ${titulo}
@@ -87,7 +87,7 @@ function lemon_programs(){
     # Shell
     clear
     titulo_
-    echo '__________SHELL__________'
+    echo '\t\t\t[----------SHELL----------]'
     ######
         titulo=$Shell
         aumentar_ ${titulo}
@@ -102,7 +102,7 @@ function lemon_programs(){
     # Editor de texto
     clear
     titulo_
-    echo '__________Editor__________'
+    echo '\t\t\t[----------Editor----------]'
     ######
         titulo=$editor
         aumentar_ ${titulo}
@@ -113,7 +113,7 @@ function lemon_programs(){
     # Xorg
     clear
     titulo_
-    echo '__________Xorg__________'
+    echo '\t\t\t[----------Xorg----------]'
     ######
         titulo='Xorg'
         aumentar_ ${titulo}
@@ -125,9 +125,9 @@ function lemon_programs(){
     # Utilidades (Opcionales)
     clear
     titulo_
-    echo '__________Utilidades__________'
+    echo '\t\t\t[----------Utilidades----------]'
     ######
-        if [ $(cat config.json | jq -r '.general.utilidades.android') ]
+        if [ $(cat config.json | jq -r '.general.utilidades.android') == true ]
         then
             titulo='android'
             aumentar_ ${titulo}
@@ -136,7 +136,7 @@ function lemon_programs(){
             arch-chroot /mnt /bin/bash -c "pacman -S android-file-transfer android-tools android-udev msmtp libmtp libcddb gvfs gvfs-afc gvfs-smb gvfs-gphoto2 gvfs-mtp gvfs-goa gvfs-nfs gvfs-google dosfstools jfsutils f2fs-tools btrfs-progs exfat-utils ntfs-3g reiserfsprogs udftools xfsprogs nilfs-utils polkit gpart mtools --noconfirm >/dev/null 2>&1"
         fi
         ######
-        if [ $(cat config.json | jq -r '.general.utilidades.git') ]
+        if [ $(cat config.json | jq -r '.general.utilidades.git') == true ]
         then
             clear
             titulo_
@@ -145,7 +145,7 @@ function lemon_programs(){
             arch-chroot /mnt /bin/bash -c "pacman -S git --noconfirm >/dev/null 2>&1"
         fi
         ######
-        if [ $(cat config.json | jq -r '.general.utilidades.wget') ]
+        if [ $(cat config.json | jq -r '.general.utilidades.wget') == true ]
         then
             clear
             titulo_
@@ -154,7 +154,7 @@ function lemon_programs(){
             arch-chroot /mnt /bin/bash -c "pacman -S wget --noconfirm >/dev/null 2>&1"
         fi
         ######
-        if [ $(cat config.json | jq -r '.general.utilidades.neofetch') ]
+        if [ $(cat config.json | jq -r '.general.utilidades.neofetch') == true ]
         then
             clear
             titulo_
@@ -171,7 +171,7 @@ function lemon_programs(){
     # Tipografía
     clear
     titulo_
-    echo '__________Tipografía__________'
+    echo '\t\t\t[----------Tipografía----------]'
     ######
         titulo='gnu-free-fonts'
         aumentar_ ${titulo}
@@ -199,32 +199,26 @@ function lemon_programs(){
     # Escritorios (Opcionales)
     clear
     titulo_
-    echo '__________Escritorios__________'
+    echo '\t\t\t[----------Escritorios----------]'
     ######
         if [ "${WM}" == "qtile" ]
         then
             titulo=$WM
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S $WM python python2 thunar alacritty network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noconfirm >/dev/null 2>&1"
-            echo ly > DMservice
-            qtile_config=true
         fi
         ######
         if [ "${WM}" == "bspwm" ]
         then
             titulo=$WM
             aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "pacman -S $WM sxhkd rofi dmenu st thunar network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noconfirm >/dev/null 2>&1"
-            echo ly > DMservice
-            bspwmtema=true
+            arch-chroot /mnt /bin/bash -c "pacman -S $WM sxhkd dmenu st thunar network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noconfirm >/dev/null 2>&1"
         fi
         if [ "${WM}" == "awesome" ]
         then
             titulo=$WM
             aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "pacman -S $WM rxvt-unicode rofi st thunar network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git gnome-themes-extra --noconfirm >/dev/null 2>&1"
-            echo ly > DMservice
-            bspwmtema=true
+            arch-chroot /mnt /bin/bash -c "pacman -S $WM st thunar network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noconfirm >/dev/null 2>&1"
         fi
         ######
     echo ''
@@ -233,13 +227,13 @@ function lemon_programs(){
     # Display Manager
     clear
     titulo_
-    echo '__________Display Manager__________'
+    echo '\t\t\t[----------Display Manager----------]'
     ######
         if [ "${DM}" == "ly-git"]
         then
             titulo=$DM
             aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "pacman -S $DM --noconfirm >/dev/null 2>&1"
+            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $DM --noeditmenu --noconfirm --needed >/dev/null 2>&1"
             arch-chroot /mnt /bin/bash -c "systemctl enable $DM >/dev/null 2>&1"
         fi
         ######
@@ -257,51 +251,45 @@ function lemon_programs(){
     # Aur helper (Opcionales)
     clear
     titulo_
-    echo '__________Aur Helper__________'
+    echo '\t\t\t[----------Aur Helper----------]'
     ######
-        if [ "${aur}" == "todo" ]
+        if [ "${aur}" == "paru" ]
         then
-            titulo='yay'
+            titulo=$aur
             aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S yay --noeditmenu --noconfirm --needed >/dev/null 2>&1"
-            titulo='octopi'
-            aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S octopi --noeditmenu --noconfirm --needed >/dev/null 2>&1"
-        else
-        ######
-            if [ "${aur}" == "yay" ]
-            then
-                titulo=$aur
-                aumentar_ ${titulo}
-                arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $aur --noeditmenu --noconfirm --needed >/dev/null 2>&1"
-            fi
-            ######
-            if [ "${aur}" == "octopi" ]
-            then
-                clear
-                titulo_
-                titulo=$aur
-                aumentar_ ${titulo}
-                arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $aur --noeditmenu --noconfirm --needed >/dev/null 2>&1"
-            fi
-            ######
+            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $aur --noeditmenu --noconfirm --needed >/dev/null 2>&1"
         fi
+        ######
+        if [ "${aur}" == "yay" ]
+        then
+            titulo=$aur
+            aumentar_ ${titulo}
+            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $aur --noeditmenu --noconfirm --needed >/dev/null 2>&1"
+        fi
+        ######
+        if [ "${aur}" == "octopi" ]
+        then
+            titulo=$aur
+            aumentar_ ${titulo}
+            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $aur --noeditmenu --noconfirm --needed >/dev/null 2>&1"
+        fi
+        ######
     echo ''
     ######
 
     # Programas extras (Opcionales)
     clear
     titulo_
-    echo '__________Extra__________'
+    echo '\t\t\t[----------Extra----------]'
     ######
-        if [ $(cat config.json | jq -r '.general.extra.rofi') ]
+        if [ $(cat config.json | jq -r '.general.extra.rofi') == true ]
         then # Menu de busqueda
             titulo='rofi'
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S rofi --noconfirm >/dev/null 2>&1"
         fi
         ######
-        if [ $(cat config.json | jq -r '.general.extra.scrot') ]
+        if [ $(cat config.json | jq -r '.general.extra.scrot') == true ]
         then # Captura de pantalla
             clear
             titulo_
@@ -310,7 +298,7 @@ function lemon_programs(){
             arch-chroot /mnt /bin/bash -c "pacman -S scrot --noconfirm >/dev/null 2>&1"
         fi
         ######
-        if [ $(cat config.json | jq -r '.general.extra.qview') ]
+        if [ $(cat config.json | jq -r '.general.extra.qview') == true ]
         then # Visualizador de imagenes
             clear
             titulo_
@@ -319,7 +307,7 @@ function lemon_programs(){
             arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S qview --noeditmenu --noconfirm --needed >/dev/null 2>&1"
         fi
         ######
-        if [ $(cat config.json | jq -r '.general.extra.pulseaudio') ]
+        if [ $(cat config.json | jq -r '.general.extra.pulseaudio') == true ]
         then # Audio
             clear
             titulo_
@@ -328,7 +316,7 @@ function lemon_programs(){
             arch-chroot /mnt /bin/bash -c "pacman -S pulseaudio pavucontrol --noconfirm >/dev/null 2>&1"
         fi
         ######
-        if [ $(cat config.json | jq -r '.general.extra.waifai') ]
+        if [ $(cat config.json | jq -r '.general.extra.waifai') == true ]
         then # Wifi
             clear
             titulo_
@@ -337,7 +325,7 @@ function lemon_programs(){
             arch-chroot /mnt /bin/bash -c "pacman -S iw wireless_tools wpa_supplicant dialog wireless-regdb --noconfirm >/dev/null 2>&1"
         fi
         ######
-        if [ $(cat config.json | jq -r '.general.extra.Bluetuuu') ]
+        if [ $(cat config.json | jq -r '.general.extra.Bluetuuu') == true ]
         then # Bluetooth
             clear
             titulo_
@@ -351,7 +339,7 @@ function lemon_programs(){
     # Navegador (Opcionales)
     clear
     titulo_
-    echo '__________Navegadores__________'
+    echo '\t\t\t[----------Navegadores----------]'
     ######
         if [ "${navegador}" == "firefox" ]
         then
@@ -372,16 +360,16 @@ function lemon_programs(){
     # Programas de dev (Opcionales)
     clear
     titulo_
-    echo '__________Programas de desarrollo__________'
+    echo '\t\t\t[----------Programas de desarrollo----------]'
     ######
-        if [ $(cat config.json | jq -r '.general.dev.gcc') ]
+        if [ $(cat config.json | jq -r '.general.dev.gcc') == true ]
         then # Compilador de C, Cpp
             titulo='gcc'
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S gcc --noconfirm >/dev/null 2>&1"
         fi
         ######
-        if [ $(cat config.json | jq -r '.general.dev.cmake') ]
+        if [ $(cat config.json | jq -r '.general.dev.cmake') == true ]
         then # Cmake
             clear
             titulo_
@@ -390,7 +378,7 @@ function lemon_programs(){
             arch-chroot /mnt /bin/bash -c "pacman -S cmake --noconfirm >/dev/null 2>&1"
         fi
         ######
-        if [ $(cat config.json | jq -r '.general.dev.anaconda') ]
+        if [ $(cat config.json | jq -r '.general.dev.anaconda') == true ]
         then # Anaconda
             clear
             titulo_
