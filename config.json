@@ -25,7 +25,7 @@
         },
         "DM": {
             "_comentario": "Opciones: lightdm, ly-git",
-            "dm": "ly-git"
+            "dm": "lightdm"
         },
         "WM": {
             "_comentario": "Opciones: qtile, bspwm, awesome",
@@ -36,15 +36,15 @@
             "eleccion": "maquina-virtual"
         },
         "app-general": {
-            "_comentario":"Opciones terminal(alacritty, rxvt-unicode), shell(zsh, fish), editor(vim, nano, gedit), Navegadores(brave-bin, firefox)",
-            "terminal": "alacritty",
+            "_comentario":"Opciones terminal(alacritty, rxvt-unicode, kitty), shell(zsh, fish), editor(vim, nano, gedit), Navegadores(brave-bin, firefox)",
+            "terminal": "kitty",
             "shell": "fish",
             "editor": "vim",
             "navegador": "brave-bin"
         },
         "aur-helper": {
-            "_comentario": "Opciones: yay, octopi, todo, nada",
-            "eleccion": "todo"
+            "_comentario": "Opciones: yay, octopi, paru, todo, nada",
+            "eleccion": "paru"
         },
         "utilidades": {
             "_comentario": "Opciones: true, fale",
