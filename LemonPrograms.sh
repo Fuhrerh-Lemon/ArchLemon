@@ -2,18 +2,18 @@
 : 'Copyright (C) 2021 FuhrerLemon, Hewel Ochoa'
 #!/bin/bash
 
-# Variables globales
-declare -r Shell=$(cat config.json | jq -r '."general"."app-general"."shell"')
-declare -r terminal=$(cat config.json | jq -r '."general"."app-general"."terminal"')
-declare -r editor=$(cat config.json | jq -r '."general"."app-general".editor"')
-declare -r navegador=$(cat config.json | jq -r '."general"."app-general"."navegador"')
-declare -r aur=$(cat config.json | jq -r '."general"."aur-helper"."eleccion"')
-declare -r DM=$(cat config.json | jq -r '."general"."DM"."dm"')
-declare -r WM=$(cat config.json | jq -r '."general"."WM"."wm"')
-declare -r video=$(cat config.json | jq -r '."general"."GPU"."eleccion"')
-
 # Funcion que contiene todos los programas a instalar
 function lemon_programs(){
+    # Variables
+    declare -r Shell=$(cat config.json | jq -r '."general"."app-general"."shell"')
+    declare -r terminal=$(cat config.json | jq -r '."general"."app-general"."terminal"')
+    declare -r editor=$(cat config.json | jq -r '."general"."app-general".editor"')
+    declare -r navegador=$(cat config.json | jq -r '."general"."app-general"."navegador"')
+    declare -r aur=$(cat config.json | jq -r '."general"."aur-helper"."eleccion"')
+    declare -r DM=$(cat config.json | jq -r '."general"."DM"."dm"')
+    declare -r WM=$(cat config.json | jq -r '."general"."WM"."wm"')
+    declare -r video=$(cat config.json | jq -r '."general"."GPU"."eleccion"')
+
     ######
     titulo_
     ######
@@ -219,7 +219,7 @@ function lemon_programs(){
         then
             titulo=$WM
             aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "pacman -S xfce4 xfce4-goodies network-manager-applet --noconfirm >/dev/null 2>&1"
+            arch-chroot /mnt /bin/bash -c "pacman -S $WM st thunar network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noconfirm >/dev/null 2>&1"
         fi
         ######
         arch-chroot /mnt /bin/bash -c "systemctl enable gdm"
