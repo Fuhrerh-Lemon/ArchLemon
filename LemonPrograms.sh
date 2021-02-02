@@ -219,7 +219,7 @@ function lemon_programs(){
         then
             titulo=$WM
             aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "pacman -S $WM st thunar network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noconfirm >/dev/null 2>&1"
+            arch-chroot /mnt /bin/bash -c "pacman -S xfce4 xfce4-goodies network-manager-applet --noconfirm >/dev/null 2>&1"
         fi
         ######
         arch-chroot /mnt /bin/bash -c "systemctl enable gdm"
