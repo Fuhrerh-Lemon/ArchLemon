@@ -160,13 +160,14 @@ function lemon_programs(){
             titulo_
             titulo='neofetch'
             aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "pacman -S neofetch lsb-release xdg-user-dirs --noconfirm >/dev/null 2>&1"
-            arch-chroot /mnt /bin/bash -c "xdg-user-dirs-update >/dev/null 2>&1"
-            ######
-            arch-chroot /mnt /bin/bash -c "ls /home/$user"
+            arch-chroot /mnt /bin/bash -c "pacman -S neofetch --noconfirm >/dev/null 2>&1"
         fi
     echo ''
     ######
+    arch-chroot /mnt /bin/bash -c "pacman -S lsb-release xdg-user-dirs --noconfirm >/dev/null 2>&1"
+    arch-chroot /mnt /bin/bash -c "xdg-user-dirs-update >/dev/null 2>&1"
+    ######
+    arch-chroot /mnt /bin/bash -c "ls /home/$user"
 
     # Tipografía
     clear
@@ -221,6 +222,7 @@ function lemon_programs(){
             arch-chroot /mnt /bin/bash -c "pacman -S $WM st thunar network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noconfirm >/dev/null 2>&1"
         fi
         ######
+        arch-chroot /mnt /bin/bash -c "systemctl enable gdm"
     echo ''
     ######
 
