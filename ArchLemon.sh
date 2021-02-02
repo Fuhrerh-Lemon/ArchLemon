@@ -26,35 +26,35 @@ function aumentar_(){
 	done
 }
 
-# Variables globales										# Cambiar los valores en config.json
-declare -r disco=$(cat config.json | jq -r '."general"."disco"') 				# /dev/sda disco a particionar
-declare -r user=$(cat config.json | jq -r '."general"."usuario"."nombre"') 			# Nombre de usuario
-declare -r hostname=$(cat config.json | jq -r '."general"."hostname"."host"') 			# Nombre de la pc
+# Variables globales																		# Cambiar los config.json
+declare -r disco=$(cat config.json | jq -r '."general"."disco"') 							# /dev/sda disco a particionar
+declare -r user=$(cat config.json | jq -r '."general"."usuario"."nombre"') 					# Nombre de usuario
+declare -r hostname=$(cat config.json | jq -r '."general"."hostname"."host"') 				# Nombre de la pc
 declare -r root_passwd=$(cat config.json | jq -r '."general"."hostname"."contraroot"') 		# Contraseña del usuario root
 declare -r user_passwd=$(cat config.json | jq -r '."general"."usuario"."contrausuario"')	# Contraseña del usuario
 declare -r user_pais=$(cat config.json | jq -r '."general"."idioma-teclado"."pais"')		# País del usuario
 declare -r keymap=$(cat config.json | jq -r '."general"."idioma-teclado"."keymap"') 		# Teclado
-declare -r swap=$(cat config.json | jq -r '."general"."particion"."swap"')			# +2G	 particion swap
-declare -r root=$(cat config.json | jq -r '."general"."particion"."root"')			# +20G	 particion root
-declare -r efi=$(cat config.json | jq -r '."general"."particion"."efi"')			# +200M  particion efi
-declare -r boot=$(cat config.json | jq -r '."general"."particion"."boot"')			# +100M  particion boot
-											# ""	 partición home
-											# La partición home se creará con el resto de la memoria
+declare -r swap=$(cat config.json | jq -r '."general"."particion"."swap"')					# +2G	 particion swap
+declare -r root=$(cat config.json | jq -r '."general"."particion"."root"')					# +20G	 particion root
+declare -r efi=$(cat config.json | jq -r '."general"."particion"."efi"')					# +200M  particion efi
+declare -r boot=$(cat config.json | jq -r '."general"."particion"."boot"')					# +100M  particion boot
+																				# ""	 partición home
+																				# La partición home se creará con el resto de la memoria
 
 # Paleta de colores del Script
-declare -r rojo='\e[31m'			# rojo
+declare -r rojo='\e[31m'				# rojo
 declare -r rojo_claro='\e[1;31m'		# rojo claro
-declare -r negro='\e[30m'			# negro
+declare -r negro='\e[30m'				# negro
 declare -r blanco='\e[1;37m'			# blanco
 declare -r gris_oscuro='\e[1;30m'		# gris oscuro
 declare -r gris_claro='\e[37m'			# gris claro
-declare -r azul='\e[34m'			# azul
+declare -r azul='\e[34m'				# azul
 declare -r azul_claro='\e[1;34m'		# azul claro
-declare -r verde='\e[32m'			# verde
+declare -r verde='\e[32m'				# verde
 declare -r verde_claro='\e[1;32m'		# verde claro
-declare -r cyan='\e[36m'			# cyan
+declare -r cyan='\e[36m'				# cyan
 declare -r light_cyan='\e[1;36m'		# cyan claro
-declare -r morado='\e[35m'			# morado
+declare -r morado='\e[35m'				# morado
 declare -r morado_claro='\e[1;35m'		# morado claro
 declare -r chocolate='\e[33m'			# chocolate
 declare -r amarillo='\e[1;33m'			# amarillo
@@ -62,15 +62,15 @@ declare -r rosado='\033[1;33m'			# rosado
 
 # Background
 declare -r B_negro='\e[40m'       		# negro
-declare -r B_rojo='\e[41m'			# rojo
+declare -r B_rojo='\e[41m'				# rojo
 declare -r B_verde='\e[42m'       		# verde
-declare -r B_amarillo='\e[43m'      		# amarillo
+declare -r B_amarillo='\e[43m'      	# amarillo
 declare -r B_azul='\e[44m'        		# azul
 declare -r B_morado='\e[45m'      		# morado
 declare -r B_cyan='\e[46m'        		# Cyan
 declare -r B_Blanco='\e[47m'			# blanco
 
-declare -r fin='\e[0m'				# Termina secuencia de colores
+declare -r fin='\e[0m'					# Termina secuencia de colores
 
 # Estableciendo Idioma del sistema
 clear
@@ -82,7 +82,7 @@ echo ''
 	echo 'LANG=es_ES.UTF-8' > /etc/locale.conf
 	export LANG=es_ES.UTF-8
 echo ''
-sleep 3
+sleep 2
 
 # Actualización de llaves y mirroslist
 clear
@@ -93,7 +93,6 @@ echo ''
 	clear
 	pacman -Sy reflector python rsync --noconfirm
 echo ''
-sleep 2
 ######
 clear
 titulo_
@@ -103,7 +102,7 @@ echo ''
 	clear
 	cat /etc/pacman.d/mirrorlist
 echo ''
-sleep 3
+sleep 2
 
 # Disco
 clear
@@ -121,7 +120,7 @@ echo ''
 	echo ''
 	echo -e "${amarillo}[*]${fin} ${morado}Clave root${fin}: $root_passwd"
 echo ''
-sleep 3
+sleep 2
 ######
 uefi=$( ls /sys/firmware/efi/ | grep -ic efivars )
 
@@ -275,7 +274,7 @@ echo ''
 	genfstab -p /mnt >> /mnt/etc/fstab
 	cat /mnt/etc/fstab
 echo ''
-sleep 3
+sleep 2
 
 # Pacman configuración
 clear
@@ -293,7 +292,7 @@ echo ''
 	sed -i "93i [multilib]" /mnt/etc/pacman.conf
 	sed -i "94i Include = /etc/pacman.d/mirrorlist" /mnt/etc/pacman.conf
 echo ''
-sleep 3
+sleep 2
 
 # hosts
 clear
@@ -307,7 +306,7 @@ echo ''
 	echo ''
 	echo "Hosts: $(cat /mnt/etc/hosts)"
 echo ''
-sleep 3
+sleep 2
 
 # Admin perraaa
 clear
@@ -320,7 +319,7 @@ echo ''
 	######
 	sed -i "80i $user ALL=(ALL) ALL"  /mnt/etc/sudoers
 echo ''
-sleep 3
+sleep 2
 
 # Idioma y Zona horaria
 clear
@@ -353,7 +352,7 @@ echo ''
 	arch-chroot /mnt /bin/bash -c "pacman -Sy curl --noconfirm"
 	arch-chroot /mnt /bin/bash -c "ln -sf /usr/share/zoneinfo/$(curl https://ipapi.co/timezone) /etc/localtime"
 echo '' 
-sleep 3
+sleep 2
 
 # Opcional
 clear
@@ -370,7 +369,7 @@ echo ''
 	arch-chroot /mnt /bin/bash -c "ntpd -qg"
 	arch-chroot /mnt /bin/bash -c "hwclock --systohc"
 echo ''
-sleep 3
+sleep 2
 
 # Actualizando lista de mirror
 clear
@@ -391,9 +390,16 @@ titulo_
 echo ''
 	titulo='Kernel'
 	aumentar_ ${titulo}
-	arch-chroot /mnt /bin/bash -c "pacman -S linux-firmware linux linux-headers mkinitcpio --noconfirm >/dev/null 2>&1"
+	cp pacman.conf /mnt/etc/pacman.conf
+	arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -Sy alsi yay-bin --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "pacman -S linux-zen linux-zen-headers linux-firmware mkinitcpio --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S pacman-mirrorlist cryptsetup lvm2 logrotate nano hddtemp unzip zip --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "pacman -S dnsmasq ethtool ndisc6 inetutils wvdial gptfdisk dhcp dhcpcd dhclient ppp netctl networkmanager --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "pacman -S iwd net-tools ifplugd dialog neofetch git wget lsb-release accountsservice bash-completion --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "pacman -S less ntp usb_modeswitch usbutils which mtools exfat-utils --noconfirm --needed"
 echo ''
-sleep 3
 ######
 uefi=$( ls /sys/firmware/efi/ | grep -ic efivars )
 # Kernel Zen
@@ -421,7 +427,7 @@ then
 		echo 'ls -l /mnt/efi'
 		ls -l /mnt/efi
     echo ''
-    sleep 3
+    sleep 2
 else
     clear
 	titulo_
@@ -440,7 +446,7 @@ else
 		echo 'ls -l /mnt/boot'
 		ls -l /mnt/boot
     echo ''
-	sleep 3
+	sleep 2
 fi
 
 # Llamando funcion, para instalar los programas
@@ -463,7 +469,6 @@ echo ''
 	echo '\n\n'
 	cat /mnt/etc/X11/xorg.conf.d/00-keyboard.conf
 echo ''
-sleep 3
 
 # Desmontar y reiniciar
 clear
