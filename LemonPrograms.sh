@@ -18,7 +18,7 @@ function lemon_programs(){
     titulo_
     ######
     # NetWorkManager
-    echo '\t\t\t[----------NetWorkManager----------]'
+    echo -e '\t\t\t[----------NetWorkManager----------]'
         ######
         titulo='networkmanager'
         aumentar_ ${titulo}
@@ -35,7 +35,7 @@ function lemon_programs(){
     # GPU Video
     clear
     titulo_
-    echo '\t\t\t[----------GPU Video----------]'
+    echo -e '\t\t\t[----------GPU Video----------]'
     ######
         if [ "${video}" == "maquina-virtual" ]
         then
@@ -76,7 +76,7 @@ function lemon_programs(){
      # Terminales
     clear
     titulo_
-    echo '\t\t\t[----------Terminales----------]'
+    echo -e '\t\t\t[----------Terminales----------]'
     ######
         titulo=$terminal
         aumentar_ ${titulo}
@@ -87,7 +87,7 @@ function lemon_programs(){
     # Shell
     clear
     titulo_
-    echo '\t\t\t[----------SHELL----------]'
+    echo -e '\t\t\t[----------SHELL----------]'
     ######
         titulo=$Shell
         aumentar_ ${titulo}
@@ -102,7 +102,7 @@ function lemon_programs(){
     # Editor de texto
     clear
     titulo_
-    echo '\t\t\t[----------Editor----------]'
+    echo -e '\t\t\t[----------Editor----------]'
     ######
         titulo=$editor
         aumentar_ ${titulo}
@@ -113,7 +113,7 @@ function lemon_programs(){
     # Xorg
     clear
     titulo_
-    echo '\t\t\t[----------Xorg----------]'
+    echo -e '\t\t\t[----------Xorg----------]'
     ######
         titulo='Xorg'
         aumentar_ ${titulo}
@@ -125,7 +125,7 @@ function lemon_programs(){
     # Utilidades (Opcionales)
     clear
     titulo_
-    echo '\t\t\t[----------Utilidades----------]'
+    echo -e '\t\t\t[----------Utilidades----------]'
     ######
         if [ $(cat config.json | jq -r '.general.utilidades.android') == true ]
         then
@@ -172,7 +172,7 @@ function lemon_programs(){
     # Tipografía
     clear
     titulo_
-    echo '\t\t\t[----------Tipografía----------]'
+    echo -e '\t\t\t[----------Tipografía----------]'
     ######
         titulo='gnu-free-fonts'
         aumentar_ ${titulo}
@@ -200,7 +200,7 @@ function lemon_programs(){
     # Escritorios (Opcionales)
     clear
     titulo_
-    echo '\t\t\t[----------Escritorios----------]'
+    echo -e '\t\t\t[----------Escritorios----------]'
     ######
         if [ "${WM}" == "qtile" ]
         then
@@ -229,7 +229,7 @@ function lemon_programs(){
     # Display Manager
     clear
     titulo_
-    echo '\t\t\t[----------Display Manager----------]'
+    echo -e '\t\t\t[----------Display Manager----------]'
     ######
         if [ "${DM}" == "ly-git"]
         then
@@ -253,7 +253,7 @@ function lemon_programs(){
     # Aur helper (Opcionales)
     clear
     titulo_
-    echo '\t\t\t[----------Aur Helper----------]'
+    echo -e '\t\t\t[----------Aur Helper----------]'
     ######
         if [ "${aur}" == "paru" ]
         then
@@ -282,7 +282,7 @@ function lemon_programs(){
     # Programas extras (Opcionales)
     clear
     titulo_
-    echo '\t\t\t[----------Extra----------]'
+    echo -e '\t\t\t[----------Extra----------]'
     ######
         if [ $(cat config.json | jq -r '.general.extra.rofi') == true ]
         then # Menu de busqueda
@@ -341,7 +341,7 @@ function lemon_programs(){
     # Navegador (Opcionales)
     clear
     titulo_
-    echo '\t\t\t[----------Navegadores----------]'
+    echo -e '\t\t\t[----------Navegadores----------]'
     ######
         if [ "${navegador}" == "firefox" ]
         then
@@ -362,7 +362,7 @@ function lemon_programs(){
     # Programas de dev (Opcionales)
     clear
     titulo_
-    echo '\t\t\t[----------Programas de desarrollo----------]'
+    echo -e '\t\t\t[----------Programas de desarrollo----------]'
     ######
         if [ $(cat config.json | jq -r '.general.dev.gcc') == true ]
         then # Compilador de C, Cpp
