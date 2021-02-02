@@ -391,7 +391,7 @@ titulo_
 echo ''
 	titulo='Kernel Zen'
 	aumentar_ ${titulo}
-	arch-chroot /mnt /bin/bash -c "pacman -S linux-zen linux-zen-headers linux-firmware mkinitcpio --noconfirm >/dev/null 2>&1"
+	arch-chroot /mnt /bin/bash -c "pacman -S linux-firmware linux linux-headers mkinitcpio --noconfirm >/dev/null 2>&1"
 echo ''
 sleep 3
 ######
