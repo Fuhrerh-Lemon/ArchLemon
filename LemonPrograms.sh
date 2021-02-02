@@ -5,14 +5,14 @@
 # Funcion que contiene todos los programas a instalar
 function lemon_programs(){
     # Variables
-    declare -r Shell=$(cat config.json | jq -r '."general"."app-general"."shell"')
-    declare -r terminal=$(cat config.json | jq -r '."general"."app-general"."terminal"')
-    declare -r editor=$(cat config.json | jq -r '."general"."app-general".editor"')
-    declare -r navegador=$(cat config.json | jq -r '."general"."app-general"."navegador"')
-    declare -r aur=$(cat config.json | jq -r '."general"."aur-helper"."eleccion"')
-    declare -r DM=$(cat config.json | jq -r '."general"."DM"."dm"')
-    declare -r WM=$(cat config.json | jq -r '."general"."WM"."wm"')
-    declare -r video=$(cat config.json | jq -r '."general"."GPU"."eleccion"')
+    declare -r Shell=`readJson config.json shell` || exit 1;
+    declare -r terminal=`readJson config.json terminal` || exit 1;
+    declare -r editor=`readJson config.json editor` || exit 1;
+    declare -r navegador=`readJson config.json navegador` || exit 1;
+    declare -r aur=`readJson config.json eleccion-aur` || exit 1;
+    declare -r DM=`readJson config.json dm` || exit 1;
+    declare -r WM=`readJson config.json wm` || exit 1;
+    declare -r video=`readJson config.json eleccion-gpu` || exit 1;
 
     ######
     titulo_
