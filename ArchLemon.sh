@@ -6,14 +6,14 @@ source ./LemonPrograms.sh
 
 # Funcion título "ArchLemon"
 function titulo_(){
-	echo -e "       ${cyan}. ${fin}                                                           		"
-	echo -e "      ${cyan}/ \ ${fin}                                                          		"
-	echo -e "     ${cyan}/   \ ${fin}    ${amarillo} _                                   	  ${fin}"
-	echo -e "    ${cyan}/^.   \ ${fin}   ${amarillo}| |    ___ _ __ ___   ___  _ __     	  ${fin}"
-	echo -e "   ${cyan}/  .-.  \ ${fin}  ${amarillo}| |   / _ \ '_   _ \ / _ \| '_ \    	  ${fin}"
-	echo -e "  ${cyan}/  (   ) _\ ${fin} ${amarillo}| |__|  __/ | | | | | (_) | | | |   	  ${fin}"
-	echo -e " ${cyan}/ _.~   ~._^\ ${fin}${amarillo}|_____\___|_| |_| |_|\___/|_| |_|   	  ${fin}"
-	echo -e "${cyan}/.^         ^.\ ${fin}          ${rojo}Autores:${fin} ${cyan}Vanger, Hewel${fin}"
+	echo -e "\t\t\t       ${cyan}. ${fin}                                                           		"
+	echo -e "\t\t\t      ${cyan}/ \ ${fin}                                                          		"
+	echo -e "\t\t\t     ${cyan}/   \ ${fin}    ${amarillo} _                                   	  ${fin}"
+	echo -e "\t\t\t    ${cyan}/^.   \ ${fin}   ${amarillo}| |    ___ _ __ ___   ___  _ __     	  ${fin}"
+	echo -e "\t\t\t   ${cyan}/  .-.  \ ${fin}  ${amarillo}| |   / _ \ '_   _ \ / _ \| '_ \    	  ${fin}"
+	echo -e "\t\t\t  ${cyan}/  (   ) _\ ${fin} ${amarillo}| |__|  __/ | | | | | (_) | | | |   	  ${fin}"
+	echo -e "\t\t\t ${cyan}/ _.~   ~._^\ ${fin}${amarillo}|_____\___|_| |_| |_|\___/|_| |_|   	  ${fin}"
+	echo -e "\t\t\t${cyan}/.^         ^.\ ${fin}          ${rojo}Autores:${fin} ${cyan}Vanger, Hewel${fin}"
 }
 
 # Funcion de aumento de la barra de progreso
@@ -75,7 +75,7 @@ declare -r fin='\e[0m'					# Termina secuencia de colores
 clear
 titulo_
 echo ''
-	echo -e "[----------Sistema en ${rojo}español${fin}----------]"
+	echo -e "\t\t\t[----------Sistema en ${rojo}español${fin}----------]"
 	echo 'es_ES.UTF-8 UTF-8' > /etc/locale.gen
 	locale-gen
 	echo 'LANG=es_ES.UTF-8' > /etc/locale.conf
@@ -87,7 +87,7 @@ sleep 3
 clear
 titulo_
 echo ''
-	echo -e "[----------Llaves del ${cyan}sistema${fin}----------]"
+	echo -e "\t\t\t[----------Llaves del ${cyan}sistema${fin}----------]"
 	pacman -Sy archlinux-keyring --noconfirm
 	clear
 	pacman -Sy reflector python rsync --noconfirm
@@ -97,7 +97,7 @@ sleep 2
 clear
 titulo_
 echo ''
-	echo -e "[----------Actualizando lista de ${verde}MirrorList${fin}----------] \n"
+	echo -e "\t\t\t[----------Actualizando ${verde}MirrorList${fin}----------]"
 	reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 	clear
 	cat /etc/pacman.d/mirrorlist
@@ -108,7 +108,7 @@ sleep 3
 clear
 titulo_
 echo ''
-	echo -e "[----------Configuración ${rosado}datos usuario${fin}----------]"
+	echo -e "\t\t\t[----------Configuración ${rosado}datos usuario${fin}----------]"
 	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
 	echo "print devices" | parted | grep /dev/ | awk '{if (NR!=1) {print}}'
 	echo ''
@@ -129,7 +129,7 @@ then
 	clear
 	titulo_
 	echo ''
-	echo -e "[----------Sistema ${verde}UEFI${fin}----------]"
+	echo -e "\t\t\t[----------Sistema ${verde}UEFI${fin}----------]"
 		# Metodo con EFI - SWAP - ROOT - HOME
 		sgdisk --zap-all ${disco}
 		parted ${disco} mklabel gpt
@@ -151,16 +151,16 @@ then
 		echo $partition | awk -F ' ' '{print $4}' >  home-efi
 		######
 		echo ''
-		echo -e "${amarillo}[*]${fin} Partición ${azul}EFI${fin} es:"
+		echo -e "\t\t${amarillo}[*]${fin} Partición ${azul}EFI${fin} es:"
 		cat boot-efi
 		echo ''
-		echo -e "${amarillo}[*]${fin} Partición ${morado}SWAP${fin} es:"
+		echo -e "\t\t${amarillo}[*]${fin} Partición ${morado}SWAP${fin} es:"
 		cat swap-efi
 		echo ''
-		echo -e "${amarillo}[*]${fin} Partición ${rojo}ROOT${fin} es:"
+		echo -e "\t\t${amarillo}[*]${fin} Partición ${rojo}ROOT${fin} es:"
 		cat root-efi
 		echo ''
-		echo -e "${amarillo}[*]${fin} Partición ${verde}HOME${fin} es:"
+		echo -e "\t\t${amarillo}[*]${fin} Partición ${verde}HOME${fin} es:"
 		cat home-efi
 	echo ''
 	sleep 2
@@ -168,7 +168,7 @@ then
 	clear
 	titulo_
 	echo ''
-		echo -e "[----------Formateando ${amarillo}Particiones${fin}----------]"
+		echo -e "\t\t\t[----------Formateando ${amarillo}Particiones${fin}----------]"
 		mkfs.ext4 $(cat root-efi)
 		mount $(cat root-efi) /mnt 
 		######
@@ -188,7 +188,7 @@ then
 	clear
 	titulo_
 	echo ''
-		echo -e "[----------Revisando punto de montaje en ${rojo_claro}MOUNTPOINT${fin}----------]"
+		echo -e "\t\t\t[----------Revisando punto de montaje en ${rojo_claro}MOUNTPOINT${fin}----------]"
 		lsblk -l
 	echo ''
 	sleep 2
@@ -196,7 +196,7 @@ else
 	clear
 	titulo_
 	echo ''
-	echo -e "[----------Sistema ${verde}BIOS${fin}----------]"
+	echo -e "\t\t\t[----------Sistema ${verde}BIOS${fin}----------]"
 		# Metodo con BIOS - SWAP - ROOT- HOME
 		sgdisk --zap-all ${disco}
 		(echo o; echo n; echo p; echo 1; echo ""; echo $boot; echo n; echo p; echo 2; echo ""; echo $swap; echo n; echo p; echo 3; echo ""; echo $root; echo n; echo p; echo 4; echo ""; echo ""; echo t; echo 2; echo 82; echo a; echo 1; echo w; echo q) | fdisk ${disco}
@@ -213,16 +213,16 @@ else
 		echo $partition | awk -F ' ' '{print $4}' >  home-bios
 		######
 		echo ''
-		echo -e "${amarillo}[*]${fin} Partición ${azul}BOOT${fin} es:" 
+		echo -e "\t\t${amarillo}[*]${fin} Partición ${azul}BOOT${fin} es:" 
 		cat boot-bios
 		echo ''
-		echo -e "${amarillo}[*]${fin} Partición ${morado}SWAP${fin} es:"
+		echo -e "\t\t${amarillo}[*]${fin} Partición ${morado}SWAP${fin} es:"
 		cat swap-bios
 		echo ''
-		echo -e "${amarillo}[*]${fin} Partición ${rojo}ROOT${fin} es:"
+		echo -e "\t\t${amarillo}[*]${fin} Partición ${rojo}ROOT${fin} es:"
 		cat root-bios
 		echo ''
-		echo -e "${amarillo}[*]${fin} Partición ${verde}HOME${fin} es:"
+		echo -e "\t\t${amarillo}[*]${fin} Partición ${verde}HOME${fin} es:"
 		cat home-bios
 	echo ''
 	sleep 2
@@ -230,7 +230,7 @@ else
 	clear
 	titulo_
 	echo ''
-		echo -e "[----------Formateando ${amarillo}Particiones${fin}----------]"
+		echo -e "\t\t\t[----------Formateando ${amarillo}Particiones${fin}----------]"
 		mkfs.ext4 $(cat root-bios) 
 		mount $(cat root-bios) /mnt 
 		######
@@ -250,7 +250,7 @@ else
 	clear
 	titulo_
 	echo ''
-		echo -e "[----------Revisando punto de montaje en ${rojo_claro}MOUNTPOINT${fin}----------]"
+		echo -e "\t\t\t[----------Revisando punto de montaje en ${rojo_claro}MOUNTPOINT${fin}----------]"
 		lsblk -l
 	echo ''
 	sleep 2
@@ -259,7 +259,7 @@ fi
 clear
 titulo_
 echo ''
-	echo -e "[----------Instalando ${verde_claro}Sistema base${fin}----------]"
+	echo -e "\t\t\t[----------Instalando ${verde_claro}Sistema base${fin}----------]"
 	pacstrap /mnt base base-devel nano reflector python rsync
 echo ''
 sleep 2
@@ -267,7 +267,7 @@ sleep 2
 clear
 titulo_
 echo ''
-	echo -e "[----------Archivo ${morado}FSTAB${fin}----------]"
+	echo -e "\t\t\t[----------Archivo ${morado}FSTAB${fin}----------]"
 	echo "genfstab -p /mnt >> /mnt/etc/fstab"
 	echo ''
 	######
@@ -280,7 +280,7 @@ sleep 3
 clear
 titulo_
 echo ''
-	echo -e "[----------Configuración de ${morado_claro}pacman${fin}----------]"
+	echo -e "\t\t\t[----------Configuración de ${morado_claro}pacman${fin}----------]"
 	sed -i 's/#Color/Color/g' /mnt/etc/pacman.conf
 	sed -i 's/#TotalDownload/TotalDownload/g' /mnt/etc/pacman.conf
 	sed -i 's/#VerbosePkgLists/VerbosePkgLists/g' /mnt/etc/pacman.conf
@@ -298,7 +298,7 @@ sleep 3
 clear
 titulo_
 echo ''
-	echo -e "[----------Nombre del ${gris_claro}computador${fin}----------]"
+	echo -e "\t\t\t[----------Nombre del ${gris_claro}computador${fin}----------]"
 	echo "$hostname" > /mnt/etc/hostname
 	echo "127.0.1.1 $hostname.localdomain $hostname" > /mnt/etc/hosts
 	echo ''
@@ -312,7 +312,7 @@ sleep 3
 clear
 titulo_
 echo ''
-	echo -e "[----------${cyan}Admin${fin}----------]"
+	echo -e "\t\t\t[----------${cyan}Admin${fin}----------]"
 	arch-chroot /mnt /bin/bash -c "(echo $root_passwd ; echo $root_passwd) | passwd root"
 	arch-chroot /mnt /bin/bash -c "useradd -m -g users -s /bin/bash $user"
 	arch-chroot /mnt /bin/bash -c "(echo $user_passwd ; echo $user_passwd) | passwd $user"
@@ -358,7 +358,7 @@ sleep 3
 clear
 titulo_
 echo ''
-	echo -e "[----------${red}KeyMap${fin}----------]"
+	echo -e "\t\t\t[----------${red}KeyMap${fin}----------]"
 	echo "KEYMAP=es" > /mnt/etc/vconsole.conf 
 	cat /mnt/etc/vconsole.conf 
 	clear
@@ -375,7 +375,7 @@ sleep 3
 clear
 titulo_
 echo ''
-	echo -e "[----------Actualizando ${verde_claro}MirrorList${fin}----------]"
+	echo -e "\t\t\t[----------Actualizando ${verde_claro}MirrorList${fin}----------]"
 	echo ''
 	arch-chroot /mnt /bin/bash -c "reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist"
 	sleep 2
@@ -391,12 +391,6 @@ titulo_
 echo ''
 	titulo='Kernel Zen'
 	aumentar_ ${titulo}
-	cp pacman.conf /mnt/etc/pacman.conf
-	titulo='Procesos Extras'
-	aumentar_ ${titulo}
-	arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm >/dev/null 2>&1"
-	arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm >/dev/null 2>&1"
-	arch-chroot /mnt /bin/bash -c "pacman -Sy alsi yay-bin --noconfirm --needed >/dev/null 2>&1"
 	arch-chroot /mnt /bin/bash -c "pacman -S linux-zen linux-zen-headers linux-firmware mkinitcpio --noconfirm >/dev/null 2>&1"
 echo ''
 sleep 3
@@ -409,7 +403,7 @@ then
     clear
 	titulo_
 	echo ''
-		echo -e "[----------${cyan}Grub del sistema${fin}----------]"
+		echo -e "\t\t\t[----------${cyan}Grub del sistema${fin}----------]"
 		arch-chroot /mnt /bin/bash -c "pacman -S grub efibootmgr os-prober dosfstools --noconfirm"
 		echo ''
 		echo 'Instalando EFI System >> bootx64.efi'
@@ -432,7 +426,7 @@ else
     clear
 	titulo_
 	echo ''
-		echo -e "[----------${cyan}Grub del sistema${fin}----------]"
+		echo -e "\t\t\t[----------${cyan}Grub del sistema${fin}----------]"
 		arch-chroot /mnt /bin/bash -c "pacman -S grub os-prober --noconfirm"
 		echo ''
 		arch-chroot /mnt /bin/bash -c "grub-install --target=i386-pc $disco"
@@ -457,7 +451,7 @@ lemon_programs ${user}
 clear
 titulo_
 echo ''
-	echo -e "[----------Formato del ${rojo_claro}teclado${fin}----------]"
+	echo -e "\t\t\t[----------Formato del ${rojo_claro}teclado${fin}----------]"
 	arch-chroot /mnt /bin/bash -c "localectl --no-convert set-x11-keymap $keymap"
 	arch-chroot /mnt /bin/bash -c "setxkbmap -layout $keymap"
 	######
