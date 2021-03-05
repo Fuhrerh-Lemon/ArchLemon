@@ -23,14 +23,6 @@
             "pais": "es_PA.UTF-8",
             "keymap": "la-latin1"
         },
-        "DM": {
-            "_comentario": "Opciones: lightdm, ly-git",
-            "dm": "lightdm"
-        },
-        "WM": {
-            "_comentario": "Opciones: qtile, bspwm, awesome",
-            "wm": "awesome"
-        },
         "GPU": {
             "_comentario": "Opciones: maquina-virtual, Nvidea, AMD, INTEL",
             "eleccion-gpu": "maquina-virtual"
@@ -39,25 +31,36 @@
             "_comentario":"Opciones terminal(alacritty, rxvt-unicode, kitty), shell(zsh, fish), editor(vim, nano, gedit), Navegadores(brave-bin, firefox)",
             "terminal": "kitty",
             "shell": "fish",
-            "editor": "vim",
-            "navegador": "brave-bin"
+            "editor": "neovim",
+            "navegador": "firefox"
+        },
+        "DM": {
+            "_comentario": "Opciones: true, false",
+            "lightdm": true,
+            "ly-git": false
+        },
+        "WM": {
+            "_comentario": "Opciones: true, false",
+            "awesome": false,
+            "qtile": false,
+            "bspwm": false,
+            "xfce": true
         },
         "aur-helper": {
-            "_comentario": "Opciones: yay, octopi, paru, todo, nada",
-            "eleccion-aur": "paru"
+            "_comentario": "Opciones: true, false",
+            "paru": true,
+            "octopi": false
         },
         "utilidades": {
             "_comentario": "Opciones: true, fale",
             "android": false,
             "git": true,
-            "wget": true,
-            "neofetch": false
+            "wget": true
         },
         "extra": {
             "_comentario": "Opciones: true, fale",
             "rofi": true,
             "scrot": true,
-            "qview": false,
             "pulseaudio": false,
             "waifai": false,
             "Bluetuuu": false
@@ -65,8 +68,7 @@
         "dev": {
             "_comentario": "Opciones: true, fale",
             "gcc": true,
-            "cmake": true,
-            "anaconda": false
+            "cmake": true
         }
     }
 }
