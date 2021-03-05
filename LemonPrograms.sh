@@ -5,14 +5,11 @@
 # Funcion que contiene todos los programas a instalar
 function lemon_programs(){
     # Variables
-    declare -r Shell=`readJson config.json shell` || exit 1;
-    declare -r terminal=`readJson config.json terminal` || exit 1;
-    declare -r editor=`readJson config.json editor` || exit 1;
-    declare -r navegador=`readJson config.json navegador` || exit 1;
-    declare -r aur=`readJson config.json eleccion-aur` || exit 1;
-    declare -r DM=`readJson config.json dm` || exit 1;
-    declare -r WM=`readJson config.json wm` || exit 1;
-    declare -r video=`readJson config.json eleccion-gpu` || exit 1;
+    declare -r Shell=$(cat config.json | jq -r '."general"."app-general"."shell"')
+    declare -r terminal=$(cat config.json | jq -r '."general"."app-general"."terminal"')
+    declare -r editor=$(cat config.json | jq -r '."general"."app-general"."editor"')
+    declare -r navegador=$(cat config.json | jq -r '."general"."app-general"."navegador"')
+    declare -r video=$(cat config.json | jq -r '."general"."GPU"."eleccion-gpu"')
 
     ######
     titulo_
@@ -99,7 +96,7 @@ function lemon_programs(){
     ######
         titulo='Xorg'
         aumentar_ ${titulo}
-        arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S xorg xorg-apps xorg-xinit xorg-twm xterm xf86-input-libinput --noeditmenu --noconfirm --needed >/dev/null 2>&1"
+        arch-chroot /mnt /bin/bash -c "pacman -S xorg xorg-apps xorg-xinit xorg-twm xterm xorg-xclock --noconfirm"
     echo ''
     ######
     sleep 3
@@ -135,14 +132,6 @@ function lemon_programs(){
             arch-chroot /mnt /bin/bash -c "pacman -S wget --noconfirm >/dev/null 2>&1"
         fi
         ######
-        if [ $(cat config.json | jq -r '.general.utilidades.neofetch') == true ]
-        then
-            clear
-            titulo_
-            titulo='neofetch'
-            aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "pacman -S neofetch --noconfirm >/dev/null 2>&1"
-        fi
     echo ''
     ######
     arch-chroot /mnt /bin/bash -c "pacman -S lsb-release xdg-user-dirs --noconfirm >/dev/null 2>&1"
@@ -156,7 +145,6 @@ function lemon_programs(){
     ######
         titulo='gnu-free-fonts'
         aumentar_ ${titulo}
-        arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S nerd-fonts --noeditmenu --noconfirm --needed >/dev/null 2>&1"
         ######
         clear
         titulo_
@@ -168,11 +156,6 @@ function lemon_programs(){
         titulo='ttf-hack ttf-inconsolata'
         aumentar_ ${titulo}
         ######
-        clear
-        titulo_
-        titulo='nerd-fonts'
-        aumentar_ ${titulo}
-        ######
         arch-chroot /mnt /bin/bash -c "pacman -S gnu-free-fonts ttf-hack ttf-inconsolata gnome-font-viewer --noconfirm >/dev/null 2>&1"
     echo ''
     ######
@@ -181,17 +164,26 @@ function lemon_programs(){
     clear
     titulo_
     ######
-        titulo=$WM
-        aumentar_ ${titulo}
-        if [ "${WM}" == "qtile" ];then
-            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $WM python python2 thunar alacritty network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noeditmenu --noconfirm --needed >/dev/null 2>&1"
+        if [ $(cat config.json | jq -r '.general.WM.qtile') == true ];then
+            titulo='qtile'
+            aumentar_ ${titulo}
+            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S qtile python python2 thunar alacritty network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noeditmenu --noconfirm --needed >/dev/null 2>&1"
         fi
         ######
-        if [ "${WM}" == "bspwm" ];then
-            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $WM sxhkd dmenu st thunar network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noeditmenu --noconfirm --needed >/dev/null 2>&1"
+        if [ $(cat config.json | jq -r '.general.WM.bspwm') == true ];then
+            titulo='bspwm'
+            aumentar_ ${titulo}
+            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S bspwm sxhkd dmenu st thunar network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noeditmenu --noconfirm --needed >/dev/null 2>&1"
         fi
-        if [ "${WM}" == "awesome" ];then
-            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $WM st thunar network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noeditmenu --noconfirm --needed >/dev/null 2>&1"
+        if [ $(cat config.json | jq -r '.general.WM.awesome') == true ];then
+            titulo='awesome'
+            aumentar_ ${titulo}
+            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S awesome st thunar network-manager-applet polkit-gnome gnome-keyring lxappearance ly-git rxvt-unicode gnome-themes-extra --noeditmenu --noconfirm --needed >/dev/null 2>&1"
+        fi
+        if [ $(cat config.json | jq -r '.general.WM.xfce') == true ];then
+            titulo='xfce'
+            aumentar_ ${titulo}
+            arch-chroot /mnt /bin/bash -c "pacman -S xfce4 xfce4-goodies network-manager-applet --noconfirm"
         fi
         ######
     echo ''
@@ -201,14 +193,19 @@ function lemon_programs(){
     clear
     titulo_
     ######
-        titulo=$DM
-        aumentar_ ${titulo}
-        if [ "${DM}" == "ly-git"];then
-            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $DM --noeditmenu --noconfirm --needed >/dev/null 2>&1"
+        if [ $(cat config.json | jq -r '.general.DM.ly-git') == true ];then
+            titulo='ly-git'
+            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S ly-git --noeditmenu --noconfirm --needed >/dev/null 2>&1"
             echo -e "\t\t\t\tActivando Servicio Display Manager"
             printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
             echo -e ""
             arch-chroot /mnt /bin/bash -c "systemctl enable $(cat DMservice)"
+        fi
+        if [ $(cat config.json | jq -r '.general.DM.lightdm') == true ];then
+            titulo='lightdm'
+            aumentar_ ${titulo}
+            arch-chroot /mnt /bin/bash -c "pacman -S lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings light-locker accountsservice --noconfirm"
+            arch-chroot /mnt /bin/bash -c "systemctl enable lightdm"
         fi
     echo ''
     ######
@@ -218,25 +215,18 @@ function lemon_programs(){
     clear
     titulo_
     ######
-        if [ "${aur}" == "paru" ]
+        if [ $(cat config.json | jq -r '.general.aur-helper.paru') == true ]
         then
-            titulo=$aur
+            titulo=paru
             aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $aur --noeditmenu --noconfirm --needed >/dev/null 2>&1"
+            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S paru --noeditmenu --noconfirm --needed >/dev/null 2>&1"
         fi
         ######
-        if [ "${aur}" == "yay-bin" ]
+        if [ $(cat config.json | jq -r '.general.aur-helper.octopi') == true ]
         then
-            titulo=$aur
+            titulo=octopi
             aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $aur --noeditmenu --noconfirm --needed >/dev/null 2>&1"
-        fi
-        ######
-        if [ "${aur}" == "octopi" ]
-        then
-            titulo=$aur
-            aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S $aur --noeditmenu --noconfirm --needed >/dev/null 2>&1"
+            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S octopi --noeditmenu --noconfirm --needed >/dev/null 2>&1"
         fi
         ######
     echo ''
@@ -260,15 +250,6 @@ function lemon_programs(){
             titulo='scrot'
             aumentar_ ${titulo}
             arch-chroot /mnt /bin/bash -c "pacman -S scrot --noconfirm >/dev/null 2>&1"
-        fi
-        ######
-        if [ $(cat config.json | jq -r '.general.extra.qview') == true ]
-        then # Visualizador de imagenes
-            clear
-            titulo_
-            titulo='qview'
-            aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S qview --noeditmenu --noconfirm --needed >/dev/null 2>&1"
         fi
         ######
         if [ $(cat config.json | jq -r '.general.extra.pulseaudio') == true ]
@@ -336,14 +317,6 @@ function lemon_programs(){
             arch-chroot /mnt /bin/bash -c "pacman -S cmake --noconfirm >/dev/null 2>&1"
         fi
         ######
-        if [ $(cat config.json | jq -r '.general.dev.anaconda') == true ]
-        then # Anaconda
-            clear
-            titulo_
-            titulo='anaconda'
-            aumentar_ ${titulo}
-            arch-chroot /mnt /bin/bash -c "sudo -u $user yay -S anaconda --noeditmenu --noconfirm --needed >/dev/null 2>&1"
-        fi
     echo ''
     ######
 }
