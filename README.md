@@ -82,10 +82,20 @@ Puedes cambiar los valores en config.json
 }
 ```
 ### Instalación
+git
 ```sh
 loadkeys es
 pacman -Sy git jq
 git clone https://github.com/Fuhrerh-Lemon/ArchLemon.git
+cd ArchLemon
+sh ArchLemon.sh
+```
+curl
+```sh
+loadkeys es
+pacman -Sy jq
+curl -LJO https://github.com/Fuhrerh-Lemon/ArchLemon/archive/ArchLemon.tar.gz
+tar  -xvf  ArchLemon.tar.gz
 cd ArchLemon
 sh ArchLemon.sh
 ```
