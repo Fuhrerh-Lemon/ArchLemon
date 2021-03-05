@@ -15,7 +15,7 @@ Puedes cambiar los valores en config.json
             "contrausuario": "12345"
         },
         "hostname": {
-            "nombre": "arch",
+            "host": "arch",
             "contraroot": "54321"
         },
         "disco": "/dev/sda",
@@ -31,41 +31,44 @@ Puedes cambiar los valores en config.json
             "pais": "es_PA.UTF-8",
             "keymap": "la-latin1"
         },
-        "DM": {
-            "_comentario": "Opciones: lightdm, ly-git",
-            "dm": "ly-git"
-        },
-        "WM": {
-            "_comentario": "Opciones: qtile, bspwm, awesome",
-            "wm": "awesome"
-        },
         "GPU": {
             "_comentario": "Opciones: maquina-virtual, Nvidea, AMD, INTEL",
-            "eleccion": "maquina-virtual"
+            "eleccion-gpu": "maquina-virtual"
         },
         "app-general": {
-            "_comentario":"Opciones terminal(alacritty, rxvt-unicode), shell(zsh, fish), editor(vim, nano, gedit), Navegadores(brave-bin, firefox)",
-            "terminal": "alacritty",
+            "_comentario":"Opciones terminal(alacritty, rxvt-unicode, kitty), shell(zsh, fish), editor(vim, nano, gedit), Navegadores(brave-bin, firefox)",
+            "terminal": "kitty",
             "shell": "fish",
-            "editor": "vim",
-            "navegador": "brave-bin"
+            "editor": "neovim",
+            "navegador": "firefox"
+        },
+        "DM": {
+            "_comentario": "Opciones: true, false",
+            "lightdm": true,
+            "ly-git": false
+        },
+        "WM": {
+            "_comentario": "Opciones: true, false",
+            "awesome": false,
+            "qtile": false,
+            "bspwm": false,
+            "xfce": true
         },
         "aur-helper": {
-            "_comentario": "Opciones: yay, octopi, todo, nada",
-            "eleccion": "todo"
+            "_comentario": "Opciones: true, false",
+            "paru": true,
+            "octopi": false
         },
         "utilidades": {
             "_comentario": "Opciones: true, fale",
             "android": false,
             "git": true,
-            "wget": true,
-            "neofetch": false
+            "wget": true
         },
         "extra": {
             "_comentario": "Opciones: true, fale",
             "rofi": true,
             "scrot": true,
-            "qview": false,
             "pulseaudio": false,
             "waifai": false,
             "Bluetuuu": false
@@ -73,8 +76,7 @@ Puedes cambiar los valores en config.json
         "dev": {
             "_comentario": "Opciones: true, fale",
             "gcc": true,
-            "cmake": true,
-            "anaconda": false
+            "cmake": true
         }
     }
 }
